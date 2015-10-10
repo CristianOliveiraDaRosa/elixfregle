@@ -1,11 +1,19 @@
 defmodule FreeGoogleTranslator do
-  @doc """
-    Request transalation of `text` `from` a given language `to` another
+  import Extract
+  import Request
+  
+  def api_url do
+    "https://translate.google.com/translate_a/"
+  end
 
-    Example:
-      FreeGoogleTranslator.request("hello", :en, :pt) # => "ola"
-  """
-  def request(text, from, to) do
-    Request.get("single?client=z&sl=#{from}&tl=#{to}-CN&dt=t&dt=rm&q=#{text}").body
+  def params(text, from, to) do
+    "single?client=z&sl=#{from}&tl=#{to}&dt=t&dt=rm&q=#{text}"
+  end
+
+  def translate(text, from, to) do
+    api_url <> params(text, from, to)
+      |> URI.encode 
+      |> Request.get
+      |> Extract.extract
   end
 end

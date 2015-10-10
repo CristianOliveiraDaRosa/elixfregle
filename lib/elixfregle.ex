@@ -1,5 +1,5 @@
 defmodule Elixfregle do
-  use Translator
+  alias Translator
 
   @doc """
     Return a translated text of a given `text` `from` language `to` another
@@ -12,7 +12,7 @@ defmodule Elixfregle do
         { translated: "Ola mundo", original: "Hello word" }
   """
   def translate(text, from, to) do
-    translated = request(text, from, to)
+    translated = FreeGoogleTranslator.translate(text, from, to)
     [translated: translated, original: text]
   end
 end

@@ -8,6 +8,8 @@ defmodule ElixfregleTest do
 
     # when
     result = Elixfregle.translate(word, :en, :pt)
+    
+    IO.puts result 
     # then
     assert expected == result[:translated]
   end
